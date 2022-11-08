@@ -64,13 +64,35 @@
         const list = document.getElementById("listofusers");
         let li = document.createElement("li");
         let del = document.createElement("button");
+        del.setAttribute("id", `${user._id}`);
+        const id = `${user._id}`;
+        del.setAttribute("onclick", `delete1(id)`);
         let edit = document.createElement("button");
+        edit.setAttribute("id", `${user._id}`);
+        edit.setAttribute("onclick", "edit1(id)");
+
         del.innerHTML = "delete";
         edit.innerHTML = "Edit";
         li.innerHTML = `${user.name}- ${user.email} - ${user.phone}`;
         list.appendChild(li);
         list.appendChild(del);
         list.appendChild(edit);
+      }
+      function delete1(id) {
+        console.log(id);
+        // alert("delete !");
+        axios
+          .delete(
+            `https://crudcrud.com/api/7d3f73362e654c19b6b443727b91dac8/appointmentData/` +
+              id
+          )
+          .then((response) => {
+            console.log(response);
+            location.reload();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     </script>
   </body>
